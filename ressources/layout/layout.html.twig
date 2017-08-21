@@ -1,0 +1,37 @@
+{# Cette page hérite de tout ce qu'il y a dans base.html #}
+{# On ne peut rien mettre ne dehors des block par rapport à l'héritage #}
+
+{% extends 'base.html.twig' %}
+
+
+{# Définition du block CSS #}
+{% block stylesheets %}
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('assets/images/apple-touch-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('assets/images/apple-touch-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('assets/images/apple-touch-icon-114x114.png') }}">
+    <!-- Online Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700&subset=latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700" rel="stylesheet">
+    <!-- Vender -->
+    <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/normalize.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/owl.carousel.min.css') }}" rel="stylesheet" />
+    <!-- Main CSS (SCSS Compile) -->
+    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet" />
+{% endblock %}
+
+
+
+
+{# Définition du block JS #}
+{% block javascripts %}
+    <!--scrip file-->
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+{% endblock %}

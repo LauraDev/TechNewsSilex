@@ -1,0 +1,88 @@
+{# Page d'index qui hérite de layout.html et donc de base.html #}
+{% extends 'layout.html.twig' %}
+
+
+{% block title %} Accueil {% endblock %}
+
+{# Fil d'ariane  #}
+{% set active = 'Accueil' %}
+
+
+
+{% block contenu %}
+
+	<div class="row">
+		<!--colleft-->
+		<div class="col-md-8 col-sm-12">
+			<div class="box-caption">
+				<span>spotlight</span>
+			</div>
+			<!--spotlight-->
+		<section class="owl-carousel owl-spotlight">
+			{% for spot in spotlight %}
+			<div>
+				<article class="spotlight-item">
+					<div class="spotlight-img">
+						<img alt="{{ spot.TITREARTICLE | upper}}" src="{{ asset('assets/images/product/'~spot.FEATUREDIMAGEARTICLE)}}" class="img-responsive" />
+						<a href="{{ path('technews_categorie', {'libellecategorie': spot.LIBELLECATEGORIE | lower} ) }}" class="cate-tag">{{ spot.LIBELLECATEGORIE}}</a>
+					</div>
+					<div class="spotlight-item-caption">
+						<h2 class="font-heading">
+							<a href="{{ path('technews_article', {'libellecategorie':spot.LIBELLECATEGORIE, 'slugarticle': spot.TITREARTICLE | slug , 'idarticle': spot.IDARTICLE } )}}">
+								{{ spot.TITREARTICLE | upper}}
+							</a>
+						</h2>
+						<div class="meta-post">
+							<a href="#">
+								{{ spot.NOMAUTEUR}} {{ spot.PRENOMAUTEUR}}
+							</a>
+							<em></em>
+							<span>
+								{{ spot.DATECREATIONARTICLE}}
+							</span>
+						</div>
+						<p>{{ spot.CONTENUARTICLE | accroche }}</p>
+					</div>
+				</article>
+			</div>
+			{% endfor %}
+
+		</section>
+
+
+		<!--spotlight-thumbs-->
+		<section class="spotlight-thumbs">
+			<div class="row">
+				{% for article in articles %}
+				<div class="col-md-4 col-sm-4 col-xs-12">
+					<div class="spotlight-item-thumb">
+
+						<div class="spotlight-item-thumb-img">
+						<a href="{{ path('technews_article', {'libellecategorie': article.LIBELLECATEGORIE, 'slugarticle': article.TITREARTICLE | slug , 'idarticle': article.IDARTICLE } )}}">
+								<img alt="{{ article.TITREARTICLE | upper}}" src="{{ asset('assets/images/product/'~article.FEATUREDIMAGEARTICLE)}}" />
+							</a>
+							<a href="{{ path('technews_categorie', {'libellecategorie': article.LIBELLECATEGORIE | lower} ) }}" class="cate-tag">{{ article.LIBELLECATEGORIE}}</a>
+						</div>
+						<h3><a href="{{ path('technews_article', {'libellecategorie': article.LIBELLECATEGORIE, 'slugarticle': article.TITREARTICLE | slug , 'idarticle': article.IDARTICLE } )}}">{{ article.TITREARTICLE | upper }}</a></h3>
+						<div class="meta-post">
+							<a href="#">
+								{{ article.NOMAUTEUR}} {{ article.PRENOMAUTEUR}}
+							</a>
+							<em></em>
+							<span>
+								{{ article.DATECREATIONARTICLE}}
+							</span>
+						</div>
+
+					</div>
+				</div>
+				{% endfor %}
+	    </div>
+		</section>
+	</div>
+
+{{ render(controller('Technews\\Controller\\NewsController::sidebar')) }}
+
+</div>
+
+{% endblock %}

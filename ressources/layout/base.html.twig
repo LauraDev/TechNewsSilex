@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="{% block seodescription '' %}">
+      <meta name="author" content="Laura Dev">
+      <title>{% block title '' %} - TechNews</title>
+        <!-- Block CSS-->
+      {% block stylesheets %}{% endblock %}
+  </head>
+  <body>
+      <!--preload-->
+      <div class="loader" id="page-loader">
+          <div class="loading-wrapper">
+          </div>
+      </div>
+      <!-- Include Menu -->
+      {{ render(controller('Technews\\Controller\\NewsController::menu', {'active' : active} )) }}
+
+        <!-- Block pour le Contenu -->
+      {% block contenu %}{% endblock %}
+
+        <!-- Include Footer -->
+      {% include 'inc/footer.html' %}
+
+        <!-- Block pour JS -->
+      {% block javascripts %}{% endblock %}
+  </body>
+</html>

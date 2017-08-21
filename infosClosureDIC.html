@@ -1,0 +1,68 @@
+CLOSURE en php:
+C'est une fonction anonyme qui permet de directement injecter dans le scope d'une fonction un code venant de l'extérieur
+ex $app['nom'] = function() {
+    return 'Hello';
+};
+
+function() use ($app) {
+    return $app['nom'];
+};
+Du coup dans le scope de la 2eme fonction anonyme on peut l'utiliser 
+Cette closure peut prendre la place d'un controller
+
+
+
+
+
+DIC: DEPENDANCY INJECTION CONTAINER = PIMPLE
+Prenons 2 classes
+la classe A instancie la classe B 
+Donc la classe A est dépendante de la classe B
+
+mon objet(A) = new B [donc l'objet A dépend de la classe B]
+
+-Si B insatancie une 3eme classe C:
+-B est dépendante de C
+
+-Une inter-dépendance existe.
+
+
+-L'injection c'est le fait d'intancier une classe non pas de l'intérieur de la fonction mais de l'extérieur
+-L'idées c'est que toutes les intanciations se fasse à part mais pas ds une classe
+-Ainsi si je fait une modification d'une classe, je le fait sans impacter toutes les classes interdépendante.
+
+-Le container est donc l'endroit où s'instancie les classes (container d'injection de dépendance)
+
+-new B n'existe plus: $this->get(B)
+-Nous n'intancions plus aucune classe à l'intérieur des classes
+
+
+
+PRINCIPE DU SINGLETON: 
+-Dans notre classe nous n'instancions qu'une seule fois chaque classe. 
+-Et il la garde tout le long de l'application sans recréer d'autre instance
+
+
+
+AUTRE AVANTAGE DU DIC:
+-Il intancie les classes en utilisant le principe du singleton mais que lorsque l'on en a besoin
+
+
+
+
+
+
+
+
+INTERFACE:
+
+classe abstraite -> classe ou toutes les methodes n'ont pas été définies et pour l'utiliser elle doit être héritée
+-Une interface est une structure de plusieurs fonctions prédéfinies qui n'ont pas été renseignées (vides) 
+-on n'en hérite pas, ON L'IMPLEMENTE
+
+
+
+
+
+
+

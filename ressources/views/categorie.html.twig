@@ -1,0 +1,63 @@
+{# Page d'index qui hérite de layout.html et donc de base.html #}
+{% extends 'layout.html.twig' %}
+
+
+{% block title %} {{ libellecategorie | capitalize}} {% endblock %}
+
+{# Fil d'ariane  #}
+{% set active = libellecategorie | capitalize %}
+
+{% block contenu %}
+
+<div class="row">
+
+    <!-- {{ dump(articlesParCategorie) }} -->
+        <!--colleft-->
+        <div class="col-md-8 col-sm-12">
+        {% if articlesParCategorie == null %}
+            <div class="box-caption">
+                <span>{{ libellecategorie }}</span>
+                {# autre possibilité: utiliser la var globale pour retrouver la cat ds l'url {{ global.request.get('libellecategorie')}} #}
+            </div>
+            <p>Aucun article dans cet carégorie</p>
+        {% endif %}
+
+        {% for item in articlesParCategorie %}
+            <div class="box-caption">
+                <span>{{ item.LIBELLECATEGORIE }}</span>
+            </div>
+            <!--list-news-cate-->
+            <div class="list-news-cate">
+                <article class="news-cate-item">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <a href="{{ path('technews_article', {'libellecategorie': item.LIBELLECATEGORIE, 'slugarticle': item.TITREARTICLE | slug , 'idarticle': item.IDARTICLE } )}}">
+                                <img alt="{{ item.TITREARTICLE | upper}}" src="{{ asset('assets/images/product/'~item.FEATUREDIMAGEARTICLE)}}">
+                            </a>
+                        </div>
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                            <h3><a href="{{ path('technews_article', {'libellecategorie': item.LIBELLECATEGORIE, 'slugarticle': item.TITREARTICLE | slug , 'idarticle': item.IDARTICLE } )}}"> {{ item.TITREARTICLE | upper }} </a></h3>
+                            <div class="meta-post">
+                                <a href="#">
+                                {{ item.NOMAUTEUR}} {{item.PRENOMAUTEUR }}
+                                </a>
+                                <em></em>
+                                <span>
+                                {{ item.DATECREATIONARTICLE }}
+                                </span>
+                            </div>
+                            {{ item.CONTENUARTICLE | accroche }}
+                        </div>
+                    </div>
+                </article>
+            </div>
+        {% endfor %}
+
+        </div> <!-- col-md -->
+
+
+        {{ render(controller('Technews\\Controller\\NewsController::sidebar')) }}
+
+    </div> <!-- row -->
+
+{% endblock %}
